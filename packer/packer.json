@@ -1,3 +1,28 @@
 {
-  "variables": { "ami_image_id": "ami-046dd95b1255a4a03" }
+    "variables" : {
+        "region" : "eu-west-1"
+    },
+    "builders" : [
+        {
+            "type" : "amazon-ebs",
+            "profile" : "default",
+            "region" : "{{user `region`}}",
+            "instance_type" : "t2.micro",
+            "source_ami" : "ami-046dd95b1255a4a03",
+            "ssh_username" : "ec2-user",
+            "ami_name" : "recruitment ",
+            "ami_description" : "DevOps Recruitment Tasks image",
+            "run_tags" : {
+                "Name" : "packer-builder-docker",
+                "Tool" : "Packer",
+                "Author" : "abhi"
+            }
+        }
+    ],
+    "provisioners" : [
+        {
+            "type" : "ansible",
+	    "playbook_file": "./setup-server.yml"
+        }
+    ]
 }

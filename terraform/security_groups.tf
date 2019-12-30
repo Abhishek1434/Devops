@@ -1,12 +1,12 @@
-resource "aws_security_group" "packer_build" {
+resource "aws_security_group" "vpc" {
   name        = "packer-build"
   description = "Security Group for Packer Builds"
-  vpc_id      = "vpc-090377310c7acf853"
+  vpc_id      = "${aws_vpc.default.id}"
 
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 

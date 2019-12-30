@@ -1,0 +1,19 @@
+---
+- name: Nginx deployment playbook
+  hosts: 'all'
+  become: yes
+  become_method: sudo
+
+
+  tasks:
+          - name: Update all packages
+            yum:
+                   name: "*"
+                   state: latest
+
+          - name: Installing Basic Packages
+            yum:
+                    name: ['net-tools', 'htop', 'cowsay', 'tmux']
+                    state: present 
+                    
+...
